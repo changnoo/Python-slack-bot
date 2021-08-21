@@ -1,0 +1,35 @@
+# Tutorial 1: Setting up Slack and Sending messages
+
+[Tech With Tim Tutorial 1](https://www.youtube.com/watch?v=KJ5bFv-IRFM&list=RDCMUC4JX40jDee_tINbkjycV4Sg&start_radio=1&ab_channel=TechWithTim)
+[Slack API](https://api.slack.com/)
+
+# Some things to know
+### 1. What is API?
+API stands for Application Programming Interface. API is the messenger that takes request, and tells the system what you, the user wants to do, and returns the result back to the user. A good example of an API is the waiter at a restaurant. You as the customer order a dish, and the waiter takes your order, delivers it to the kitchen, and returns your order after some time. In this case, you are the user, the waiter is the API, and the kitchen is the server. API is nothing but a messenger between the user and the system, delivering data and creating connectivity between our world.
+
+### 2. What are Python Environments?
+Succintly summarized in this website [here](https://www.dabapps.com/blog/introduction-to-pip-and-virtualenv-python/)\
+\
+Essentially, environments are useful for managing packages. Developers often make new environments in order to store packages that are only pertinent to that project. Having one big environment may lead to data corruption and missing packages, causing errors that might not be easy to trace.
+
+# Code used in this section
+```python
+import slack
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+env_path = Path(".") / '.env'
+load_dotenv(dotenv_path = env_path)
+
+client = slack.WebClient(token = os.environ['SLACK_TOKEN'])
+
+client.chat_postMessage(channel='#test', text="Hello World")
+```
+
+In this tutorial we installed and imported slackclient package, as well as python-dotenv package. We then created a variable to store our path, and then we loaded it. After, we initialized our web client using our token, then proceeded to send a message to specified channel.\
+\
+One thing to note here is that we need to specify a channel before we can send a message, and that channel has to have the Slack bot/app installed.
+
+# Result
+![sladck](https://user-images.githubusercontent.com/56273897/130310286-00b1c21c-9dfa-4da4-aaae-5602f1ead837.PNG)
